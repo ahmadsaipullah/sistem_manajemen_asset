@@ -26,11 +26,19 @@ class profileController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'nim' => ['required', 'string', 'max:10', 'unique:users,nim,' . $id],
+            'nip' => ['required', 'string', 'max:255', 'unique:users,nip,' . $id],
+            'nidn' => ['required', 'string', 'max:255', 'unique:users,nidn,' . $id],
             'no_hp' => ['required', 'string', 'max:13'],
             'email' => ['required', 'string', 'lowercase', 'email:dns', 'max:255', 'unique:users,email,' . $id],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-
+            'fakultas' => ['nullable', 'string', 'max:255'],
+            'prodi' => ['nullable', 'string', 'max:255'],
+            'status_dosen' => ['nullable', 'string', 'max:255'],
+            'jabatan_fungsional' => ['nullable', 'string', 'max:255'],
+            'jabatan' => ['nullable', 'string', 'max:255'],
+            'status_serdos' => ['nullable', 'string', 'max:255'],
+            'status_keaktifan' => ['nullable', 'string', 'max:255'],
+            'dokumen' => ['nullable', 'file', 'mimes:pdf', 'max:2048']
         ]);
 
 

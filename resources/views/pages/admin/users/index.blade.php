@@ -37,12 +37,9 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nim</th>
                                             <th>Nama</th>
                                             <th>Email</th>
-                                            <th>No Hp</th>
                                             <th>Role</th>
-                                            <th>Gender</th>
                                             <th>Image</th>
                                             <th>Action</th>
                                         </tr>
@@ -51,12 +48,9 @@
                                         @forelse ($admins as $admin)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $admin->nim }}</td>
                                                 <td>{{ $admin->name }}</td>
                                                 <td>{{ $admin->email }}</td>
-                                                <td>{{ $admin->no_hp }}</td>
                                                 <td>{{ $admin->Level->level}}</td>
-                                                <td>{{ $admin->gender}}</td>
                                                 <td>
                                                     <div class="text-center">
                                                         @if ($admin->image)
@@ -73,20 +67,24 @@
                                             </td>
                                                 <td>
 
-                                             <div class="text-center d-flex justify-content-between">
-                                                <a href="{{ route('admin.edit', $admin->id) }}"
-                                                    class="btn btn-warning btn-sm">
-                                                    <i class="fa fa-pen"></i>
-                                                </a>
-                                                <form action="{{ route('admin.destroy', $admin->id) }}" method="post"
-                                                    class="d-inline">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger btn-sm delete_confirm" type="submit">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </form>
-                                             </div>
+                                                    <div class="text-center d-flex justify-content-between">
+                                                        <a href="{{ route('admin.edit', $admin->id) }}" class="btn btn-warning btn-sm" title="Edit">
+                                                            <i class="fa fa-pen"></i>
+                                                        </a>
+
+                                                        <a href="{{ route('admin.show', $admin->id) }}" class="btn btn-primary btn-sm" title="View">
+                                                            <i class="fa fa-eye"></i>
+                                                        </a>
+
+                                                        <form action="{{ route('admin.destroy', $admin->id) }}" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <button class="btn btn-danger btn-sm" type="submit" title="Delete">
+                                                                <i class="fa fa-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+
                                                 </td>
 
                                             </tr>

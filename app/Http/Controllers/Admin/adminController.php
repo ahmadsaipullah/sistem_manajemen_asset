@@ -18,7 +18,7 @@ class adminController extends Controller
      */
     public function index()
     {
-        $admins = User::with(['Level','Dosen'])->get();
+        $admins = User::with(['Level'])->get();
         return view('pages.admin.users.index', compact('admins'));
     }
 
@@ -27,10 +27,8 @@ class adminController extends Controller
      */
     public function create()
     {
-
-        $dosens = Dosen::all();
         $levels = Level::all();
-        return view('pages.admin.users.create', compact('levels','dosens'));
+        return view('pages.admin.users.create', compact('levels'));
     }
 
     /**
@@ -40,24 +38,15 @@ class adminController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'nim' => ['required', 'string', 'max:10', 'unique:users'],
-            'no_hp' => ['required', 'string', 'max:13'],
             'email' => ['required', 'string', 'lowercase', 'email:dns', 'max:255', 'unique:users'],
             'password' => ['required', 'min:6'],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-            'gender' => ['required', 'string'],
-            'level_id' => ['nullable'],
-            'dosen_id' => ['nullable','unique:users']
+            'level_id' => ['required','integer'],
         ]);
 
         $data = [
             'name' => $request->name,
-            'nim' => $request->nim,
-            'no_hp' => $request->no_hp,
             'email' => $request->email,
             'password' => hash::make($request->password),
-            'image' => $request->image,
-            'gender' => $request->gender,
             'level_id' => $request->level_id
         ];
 
@@ -75,7 +64,11 @@ class adminController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Mengambil data admin berdasarkan ID
+        $admin = User::with(['level'])->findOrFail($id);
+
+        // Mengirim data admin ke view 'admin.show'
+        return view('pages.admin.users.show', compact('admin'));
     }
 
     /**
@@ -84,10 +77,9 @@ class adminController extends Controller
     public function edit(string $id)
     {
 
-        $dosens = Dosen::all();
         $levels = level::all();
-        $admin = User::with('Level','Dosen')->findOrFail($id);
-        return view('pages.admin.users.edit', compact('levels', 'admin','dosens'));
+        $admin = User::with('Level')->findOrFail($id);
+        return view('pages.admin.users.edit', compact('levels', 'admin'));
     }
 
     /**
@@ -98,15 +90,23 @@ class adminController extends Controller
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'nim' => ['required', 'string', 'max:10', 'unique:users,nim,' . $id],
+            'nip' => ['required', 'string', 'max:255', 'unique:users,nip,' . $id],
+            'nidn' => ['required', 'string', 'max:255', 'unique:users,nidn,' . $id],
             'no_hp' => ['required', 'string', 'max:13'],
             'email' => ['required', 'string', 'lowercase', 'email:dns', 'max:255', 'unique:users,email,' . $id],
-            'password' => ['required', 'min:6'],
+            'password' => ['required', 'string', 'min:6'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-            'gender' => ['required', 'string'],
-            'level_id' => ['nullable'],
-            'dosen_id' => ['nullable','unique:users,dosen_id,'. $id]
+            'fakultas' => ['nullable', 'string', 'max:255'],
+            'prodi' => ['nullable', 'string', 'max:255'],
+            'status_dosen' => ['nullable', 'string', 'max:255'],
+            'jabatan_fungsional' => ['nullable', 'string', 'max:255'],
+            'jabatan' => ['nullable', 'string', 'max:255'],
+            'status_serdos' => ['nullable', 'string', 'max:255'],
+            'status_keaktifan' => ['nullable', 'string', 'max:255'],
+            'level_id' => ['required', 'exists:levels,id'],
+            'dokumen' => ['nullable', 'file', 'mimes:pdf', 'max:2048']
         ]);
+
 
         $admin = User::findOrFail($id);
         $dataId = $admin->find($admin->id);
@@ -114,6 +114,11 @@ class adminController extends Controller
         if ($request->image) {
             Storage::delete('public/' . $dataId->image);
             $data['image'] = $request->file('image')->store('asset/admin', 'public');
+        }
+
+        if ($request->dokumen) {
+            Storage::delete('public/' . $dataId->dokumen);
+            $data['dokumen'] = $request->file('dokumen')->store('asset/file', 'public');
         }
 
         $dataId->update($data);

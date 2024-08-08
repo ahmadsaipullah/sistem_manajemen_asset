@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('aikas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('nbm');
             $table->string('nama_kegiatan');
             $table->string('lokasi_kegiatan');
@@ -22,6 +23,8 @@ return new class extends Migration
             $table->string('dokumen');
             $table->string('status');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
-use App\Models\Dosen;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -24,8 +21,19 @@ class User extends Authenticatable
         'email',
         'password',
         'level_id',
+        'image',
+        'nip',
+        'nidn',
+        'fakultas',
+        'prodi',
+        'status_dosen',
+        'jabatan_fungsional',
+        'jabatan',
+        'status_serdos',
+        'status_keaktifan',
+        'no_hp',
+        'dokumen'
     ];
-
 
     /**
      * The attributes that should be hidden for serialization.
@@ -47,9 +55,38 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    /**
+     * Get the level associated with the user.
+     */
     public function Level()
     {
         return $this->belongsTo(Level::class, 'level_id', 'id');
+    }
+
+    public function Aika()
+    {
+        return $this->hasMany(Aika::class, 'user_id', 'id');
+
+    }
+    public function Pendidikan()
+    {
+        return $this->hasMany(Pendidikan::class, 'user_id', 'id');
+
+    }
+    public function Penelitian()
+    {
+        return $this->hasMany(Penelitian::class, 'user_id', 'id');
+
+    }
+    public function Pengabdian()
+    {
+        return $this->hasMany(Pengabdian::class, 'user_id', 'id');
+
+    }
+    public function Penunjang()
+    {
+        return $this->hasMany(Penunjang::class, 'user_id', 'id');
+
     }
 
 }

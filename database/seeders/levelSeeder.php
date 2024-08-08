@@ -20,23 +20,10 @@ class levelSeeder extends Seeder
 
        Level::Create( [
 
-            'level' => 'Prodi',
+            'level' => 'Dosen',
 
         ]);
 
-       Level::Create( [
 
-            'level' => 'Dosen'
-        ]);
-
-       Level::Create( [
-
-            'level' => 'Akademik'
-        ]);
-
-       Level::Create( [
-
-            'level' => 'Mahasiswa'
-        ]);
     }
 }

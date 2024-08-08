@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Aika extends Model
 {
     use HasFactory;
+
+
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
 }
+
+

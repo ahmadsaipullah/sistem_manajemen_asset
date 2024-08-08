@@ -3,7 +3,7 @@
     <!-- Brand Logo -->
     <a href="{{ route('dashboard') }}" class="brand-link">
         <img src="{{ asset('assets/img/logoft.png') }}" alt="Logo" class="brand-image img-circle elevation-3">
-        <span class="brand-text font-weight-light">SISTEM SP</span>
+        <span class="brand-text font-weight-light">Manajemen Asset</span>
     </a>
 
     <!-- Sidebar -->
@@ -32,54 +32,7 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                @if (Auth::user()->level_id == 5)
-                    <li class="nav-header">Menu</li>
-                    <li class="nav-item">
-                        <a href="{{ route('pendaftaran.index') }}" class="nav-link @yield('pendaftaran')">
-                            <i class="nav-icon ion ion-compose"></i>
-                            <p>pendaftaran SP</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('pendaftaran.status') }}" class="nav-link @yield('status')">
-                            <i class="nav-icon ion ion-compose"></i>
-                            <p>Status Pendaftaran</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('daftartugas.index', auth()->user()->id) }}" class="nav-link @yield('tugas')">
-                            <i class="nav-icon ion ion-compose"></i>
-                            <p>Tugas Dosen</p>
-                        </a>
-                    </li>
-                @endif
-                @if (Auth::user()->level_id == 4)
-                    <li class="nav-header">Menu</li>
-                    <li class="nav-item">
-                        <a href="{{ route('verifikasi.index') }}" class="nav-link @yield('verifikasi')">
-                            <i class="nav-icon ion ion-person-stalker"></i>
-                            <p>Mahasiswa Pengajuan SP</p>
-                        </a>
-                    </li>
-                @endif
-                @if (Auth::user()->level_id == 3)
-                    <li class="nav-header">Menu</li>
-                    <li class="nav-item">
-                        <a href="{{ route('mahasiswa.index') }}" class="nav-link @yield('datamahasiswasp')">
-                            <i class="nav-icon ion ion-person-stalker"></i>
-                            <p>Mahasiswa SP</p>
-                        </a>
-                    </li>
-                @endif
-                @if (Auth::user()->level_id == 2)
-                    <li class="nav-header">Menu</li>
-                    <li class="nav-item">
-                        <a href="{{ route('verifikasi.mahasiswa') }}" class="nav-link @yield('verifikasimahasiswa')">
-                            <i class="nav-icon ion ion-person-stalker"></i>
-                            <p>Mahasiswa Pengajuan SP</p>
-                        </a>
-                    </li>
-                @endif
+
                 @if (Auth::user()->level_id == 1)
                     <li class="nav-header">Admin</li>
                     <li class="nav-item">
@@ -88,7 +41,7 @@
                             <p>Admin</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a href="{{ route('dosen.index') }}" class="nav-link @yield('dosen')">
                             <i class="nav-icon ion ion-person-stalker"></i>
                             <p>Dosen</p>
@@ -105,7 +58,7 @@
                             <i class="nav-icon ion ion-compose"></i>
                             <p>Pengajuan</p>
                         </a>
-                    </li>
+                    </li> --}}
                 @endif
             </ul>
         </nav>

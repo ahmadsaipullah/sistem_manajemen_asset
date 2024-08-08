@@ -22,8 +22,8 @@ return new class extends Migration
             $table->foreign('level_id')->references('id')->on('levels');
 
             $table->string('image')->nullable();
-            $table->string('nip')->unique()->default('-');
-            $table->string('nidn')->unique()->default('-');
+            $table->string('nip')->default('-');
+            $table->string('nidn')->default('-');
             $table->string('fakultas')->default('-');
             $table->string('prodi')->default('-');
             $table->string('status_dosen')->default('-');
@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('status_serdos')->default('-');
             $table->string('status_keaktifan')->default('-');
             $table->string('no_hp')->default('-');
+            $table->string('dokumen')->default('-');
             $table->rememberToken();
             $table->timestamps();
         });

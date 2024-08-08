@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Pendidikan extends Model
 {
     use HasFactory;
+
+
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }
