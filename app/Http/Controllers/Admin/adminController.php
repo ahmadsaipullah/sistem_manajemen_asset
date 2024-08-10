@@ -146,4 +146,5 @@ class adminController extends Controller
         }
         return redirect()->route('admin.index');
     }
+
 }

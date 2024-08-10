@@ -37,7 +37,7 @@ class profileController extends Controller
             'jabatan_fungsional' => ['nullable', 'string', 'max:255'],
             'jabatan' => ['nullable', 'string', 'max:255'],
             'status_serdos' => ['nullable', 'string', 'max:255'],
-            'status_keaktifan' => ['nullable', 'string', 'max:255'],
+            // 'status_keaktifan' => ['nullable', 'string', 'max:255'],
             'dokumen' => ['nullable', 'file', 'mimes:pdf', 'max:2048']
         ]);
 

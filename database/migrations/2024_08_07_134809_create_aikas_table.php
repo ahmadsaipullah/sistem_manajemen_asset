@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('tanggal_sk_kegiatan');
             $table->string('jumlah_sks');
             $table->string('dokumen');
-            $table->string('status');
+            $table->string('status')->default('Pending');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

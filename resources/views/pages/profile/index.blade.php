@@ -38,7 +38,13 @@
                                 </div>
                                 <h3 class="profile-username text-center uppercase">{{ auth()->user()->name }}</h3>
 
-                                <p class="text-muted text-center">{{ auth()->user()->nim }}</p>
+                            <div class="d-flex justify-content-center my-2">
+                                    @if( auth()->user()->status_keaktifan == 'Non Active' )
+                                    <span class="badge badge-danger text-center">{{ auth()->user()->status_keaktifan }}</span>
+                                    @else
+                                    <span class="badge badge-success text-center">{{ auth()->user()->status_keaktifan }}</span>
+                                    @endif
+                            </div>
 
                                 <ul class="list-group list-group-unbordered mb-3">
                                     <li class="list-group-item">
@@ -255,14 +261,14 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="status_keaktifan">Status Keaktifan</label>
                                     <input type="text" class="form-control @error('status_keaktifan') is-invalid @enderror"
                                            id="status_keaktifan" name="status_keaktifan" placeholder="Status Keaktifan" value="{{ old('status_keaktifan') ?? $profile->status_keaktifan }}" />
                                     @error('status_keaktifan')
                                     <span class="text-danger"> {{ $message }}</span>
                                     @enderror
-                                </div>
+                                </div> --}}
 
 
                             </div>

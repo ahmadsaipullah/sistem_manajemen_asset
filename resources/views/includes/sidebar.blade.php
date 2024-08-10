@@ -41,24 +41,36 @@
                             <p>Admin</p>
                         </a>
                     </li>
-                    {{-- <li class="nav-item">
-                        <a href="{{ route('dosen.index') }}" class="nav-link @yield('dosen')">
+                    <li class="nav-item">
+                        <a href="{{ route('pendidikan.index')}}" class="nav-link @yield('pendidikan')">
                             <i class="nav-icon ion ion-person-stalker"></i>
-                            <p>Dosen</p>
+                            <p>Pendidikan</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('matkul.index') }}" class="nav-link @yield('matkul')">
+                        <a href="{{ route('penelitian.index')}}" class="nav-link @yield('penelitian')">
                             <i class="nav-icon ion ion-clipboard"></i>
-                            <p>Matkul</p>
+                            <p>Penelitian</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('pengajuan.index') }}" class="nav-link @yield('pengajuan')">
+                        <a href="#" class="nav-link @yield('pengabdian')">
                             <i class="nav-icon ion ion-compose"></i>
-                            <p>Pengajuan</p>
+                            <p>pengabdian</p>
                         </a>
-                    </li> --}}
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link @yield('penunjang')">
+                            <i class="nav-icon ion ion-compose"></i>
+                            <p>Penunjang</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link @yield('aika')">
+                            <i class="nav-icon ion ion-clipboard"></i>
+                            <p>Aika</p>
+                        </a>
+                    </li>
                 @endif
             </ul>
         </nav>

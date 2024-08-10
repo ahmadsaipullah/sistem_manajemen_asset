@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\profileController;
+use App\Http\Controllers\PendidikanController;
+use App\Http\Controllers\PenelitianController;
 use App\Http\Controllers\Admin\{adminController,dashboardController,dosenController};
 
 /*
@@ -33,6 +35,9 @@ Route::put('/profile/{id}' ,[profileController::class, 'update'])->name('profile
 Route::middleware(['Admin'])->group( function(){
 // crud admin
 Route::resource('/admin', adminController::class);
+Route::resource('/pendidikan', PendidikanController::class);
+Route::resource('/penelitian', PenelitianController::class);
+
 Route::resource('/dosen', dosenController::class);
 
 

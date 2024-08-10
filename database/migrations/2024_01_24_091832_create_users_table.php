@@ -30,10 +30,10 @@ return new class extends Migration
             $table->string('jabatan_fungsional')->default('-');
             $table->string('jabatan')->default('-');
             $table->string('status_serdos')->default('-');
-            $table->string('status_keaktifan')->default('-');
             $table->string('no_hp')->default('-');
             $table->string('dokumen')->default('-');
             $table->rememberToken();
+            $table->string('status_keaktifan')->default('Non Active');
             $table->timestamps();
         });
     }
