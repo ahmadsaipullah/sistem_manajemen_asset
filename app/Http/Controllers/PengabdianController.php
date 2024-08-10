@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Penelitian;
+use App\Models\Pengabdian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
-class PenelitianController extends Controller
+class PengabdianController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $penelitians = Penelitian::with('user')->get();
-        return view('pages.penelitian.index', compact('penelitians'));
+        $pengabdians = Pengabdian::with('user')->get();
+        return view('pages.pengabdian.index', compact('pengabdians'));
     }
 
     /**
@@ -21,7 +22,7 @@ class PenelitianController extends Controller
      */
     public function create()
     {
-        return view('pages.penelitian.create');
+        return view('pages.pengabdian.create');
     }
 
     /**
@@ -31,7 +32,8 @@ class PenelitianController extends Controller
     {
         $request->validate([
             'user_id' => 'required',
-            'nama_publikasi' => 'required|string|max:255',
+            'nama_kegiatan' => 'required|string|max:255',
+            'lokasi_kegiatan' => 'required|string|max:255',
             'sk_kegiatan' => 'required|string|max:255',
             'tanggal_sk_kegiatan' => 'required|date',
             'jumlah_sks' => 'required|string|max:255',
@@ -40,16 +42,17 @@ class PenelitianController extends Controller
 
         $data = $request->all();
         if ($request->dokumen) {
-            $data['dokumen'] = $request->file('dokumen')->store('asset/penelitian', 'public');
+            $data['dokumen'] = $request->file('dokumen')->store('asset/pengabdian', 'public');
         }
-        Penelitian::create($data);
+
+        Pengabdian::create($data);
 
         if ($data) {
             toast('Data berhasil ditambah', 'success');
         } else {
             toast('Data Gagal Ditambahkan', 'error');
         }
-        return redirect()->route('penelitian.index');
+        return redirect()->route('pengabdian.index');
     }
 
     /**
@@ -57,8 +60,8 @@ class PenelitianController extends Controller
      */
     public function show(string $id)
     {
-        $penelitian = Penelitian::findOrFail($id);
-        return view('pages.penelitian.show', compact('penelitian'));
+        $pengabdian = Pengabdian::findOrFail($id);
+        return view('pages.pengabdian.show', compact('pengabdian'));
     }
 
     /**
@@ -66,8 +69,8 @@ class PenelitianController extends Controller
      */
     public function edit(string $id)
     {
-        $penelitian = Penelitian::findOrFail($id);
-        return view('pages.penelitian.edit', compact('penelitian'));
+        $pengabdian = Pengabdian::findOrFail($id);
+        return view('pages.pengabdian.edit', compact('pengabdian'));
     }
 
     /**
@@ -77,20 +80,21 @@ class PenelitianController extends Controller
     {
         $request->validate([
             'user_id' => 'required',
-            'nama_publikasi' => 'required|string|max:255',
+            'nama_kegiatan' => 'required|string|max:255',
+            'lokasi_kegiatan' => 'required|string|max:255',
             'sk_kegiatan' => 'required|string|max:255',
             'tanggal_sk_kegiatan' => 'required|date',
             'jumlah_sks' => 'required|string|max:255',
             'dokumen' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
         ]);
 
-        $penelitian = Penelitian::findOrFail($id);
-        $dataId = $penelitian->find($penelitian->id);
+        $pengabdian = Pengabdian::findOrFail($id);
+        $dataId = $pengabdian->find($pengabdian->id);
         $data = $request->all();
 
         if ($request->dokumen) {
             Storage::delete('public/' . $dataId->dokumen);
-            $data['dokumen'] = $request->file('dokumen')->store('asset/penelitian', 'public');
+            $data['dokumen'] = $request->file('dokumen')->store('asset/pengabdian', 'public');
         }
 
         $dataId->update($data);
@@ -100,7 +104,7 @@ class PenelitianController extends Controller
         } else {
             toast('Data Gagal Ditambahkan', 'error');
         }
-        return redirect()->route('penelitian.index');
+        return redirect()->route('pengabdian.index');
     }
 
     /**

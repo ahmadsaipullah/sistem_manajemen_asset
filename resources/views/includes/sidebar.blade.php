@@ -54,7 +54,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link @yield('pengabdian')">
+                        <a href="{{ route('pengabdian.index')}}" class="nav-link @yield('pengabdian')">
                             <i class="nav-icon ion ion-compose"></i>
                             <p>pengabdian</p>
                         </a>

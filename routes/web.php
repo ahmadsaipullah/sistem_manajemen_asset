@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\PendidikanController;
 use App\Http\Controllers\PenelitianController;
+use App\Http\Controllers\PengabdianController;
 use App\Http\Controllers\Admin\{adminController,dashboardController,dosenController};
 
 /*
@@ -37,6 +38,7 @@ Route::middleware(['Admin'])->group( function(){
 Route::resource('/admin', adminController::class);
 Route::resource('/pendidikan', PendidikanController::class);
 Route::resource('/penelitian', PenelitianController::class);
+Route::resource('/pengabdian', PengabdianController::class);
 
 Route::resource('/dosen', dosenController::class);
 
