@@ -72,6 +72,43 @@
                         </a>
                     </li>
                 @endif
+                @if (Auth::user()->status_keaktifan == 'Active')
+                @if (Auth::user()->level_id == 2)
+                <li class="nav-header">Menu</li>
+                <li class="nav-item">
+                    <a href="{{ route('pendidikan.index')}}" class="nav-link @yield('pendidikan')">
+                        <i class="nav-icon ion ion-person-stalker"></i>
+                        <p>Pendidikan</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('penelitian.index')}}" class="nav-link @yield('penelitian')">
+                        <i class="nav-icon ion ion-clipboard"></i>
+                        <p>Penelitian</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('pengabdian.index')}}" class="nav-link @yield('pengabdian')">
+                        <i class="nav-icon ion ion-compose"></i>
+                        <p>pengabdian</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('penunjang.index')}}" class="nav-link @yield('penunjang')">
+                        <i class="nav-icon ion ion-compose"></i>
+                        <p>Penunjang</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('aika.index')}}" class="nav-link @yield('aika')">
+                        <i class="nav-icon ion ion-clipboard"></i>
+                        <p>Aika</p>
+                    </a>
+                </li>
+                @endif
+                @else
+                <li class="nav-header badge badge-danger">Menunggu Approve Prodi</li>
+                @endif
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

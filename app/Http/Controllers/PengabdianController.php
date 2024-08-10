@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pengabdian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PengabdianController extends Controller
@@ -13,7 +14,11 @@ class PengabdianController extends Controller
      */
     public function index()
     {
-        $pengabdians = Pengabdian::with('user')->get();
+        if (Auth::user()->level_id == 1) {
+            $pengabdians = Pengabdian::with('user')->get();
+        } else {
+            $pengabdians = Pengabdian::with('user')->where('user_id', Auth::user()->id)->get();
+        }
         return view('pages.pengabdian.index', compact('pengabdians'));
     }
 

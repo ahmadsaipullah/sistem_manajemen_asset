@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pendidikan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PendidikanController extends Controller
@@ -13,10 +14,13 @@ class PendidikanController extends Controller
      */
     public function index()
     {
-        {
+        if (Auth::user()->level_id == 1) {
             $pendidikans = Pendidikan::with('user')->get();
-            return view('pages.pendidikan.index', compact('pendidikans'));
+        } else {
+            $pendidikans = Pendidikan::with('user')->where('user_id', Auth::user()->id)->get();
         }
+
+        return view('pages.pendidikan.index', compact('pendidikans'));
     }
 
     /**

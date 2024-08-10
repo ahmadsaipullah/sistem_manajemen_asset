@@ -42,8 +42,11 @@
                                             <th>SK Kegiatan</th>
                                             <th>Tanggal SK Kegiatan</th>
                                             <th>Jumlah SKS</th>
-                                            <th>Dokumen</th>
                                             <th>Status</th>
+                                            <th>Dokumen</th>
+                                            @if (Auth::user()->level_id == 1)
+                                            <th>Verifikasi</th>
+                                            @endif
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -57,17 +60,41 @@
                                                 <td>{{ $penelitian->tanggal_sk_kegiatan }}</td>
                                                 <td>{{ $penelitian->jumlah_sks }}</td>
                                                 <td>
-                                                    <a href="{{ Storage::url($penelitian->dokumen) }}" target="_blank">View Dokumen</a>
-                                                </td>
-                                                <td>
                                                     @if($penelitian->status == 'Pending')
                                                         <span class="badge badge-warning">{{ $penelitian->status }}</span>
                                                     @elseif($penelitian->status == 'Approved')
                                                         <span class="badge badge-success">{{ $penelitian->status }}</span>
-                                                    @else
+                                                    @elseif($penelitian->status == 'Rejected')
                                                         <span class="badge badge-danger">{{ $penelitian->status }}</span>
                                                     @endif
                                                 </td>
+                                                <td>
+                                                    <a href="{{ Storage::url($penelitian->dokumen) }}" target="_blank">View Dokumen</a>
+                                                </td>
+                                                @if (Auth::user()->level_id == 1)
+                                                <td>
+                                                    <div class="d-flex">
+
+                                                        <form action="{{route('approve.penelitian', $penelitian->id)}}" method="post">
+                                                            @csrf
+                                                            <input name="status"
+                                                            id="status" type="hidden" value="Approved">
+                                                            <button class="btn btn-xs  btn-success"
+                                                            type="submit">Approve</button>
+                                                        </form>
+                                                        |
+                                                        <form action="{{route('rejected.penelitian', $penelitian->id)}}" method="post">
+                                                            @csrf
+                                                            <input name="status"
+                                                            id="status" type="hidden" value="Rejected">
+                                                            <button class="btn btn-xs  btn-danger"
+                                                            type="submit">Rejected</button>
+                                                        </form>
+
+                                                    </div>
+
+                                                </td>
+                                                @endif
                                                 <td>
                                                     <div class="text-center d-flex justify-content-between">
                                                         <a href="{{ route('penelitian.edit', $penelitian->id) }}" class="btn btn-warning btn-sm" title="Edit">
@@ -90,7 +117,7 @@
                                             </tr>
                                         @empty
                                         <tr>
-                                            <td colspan="11" class="text-center p-5">Data Kosong</td>
+                                            <td colspan="12" class="text-center p-5">Data Kosong</td>
                                         </tr>
                                         @endforelse
                                     </tbody>

@@ -44,8 +44,11 @@
                                             <th>SK Kegiatan</th>
                                             <th>Tanggal SK Kegiatan</th>
                                             <th>Jumlah SKS</th>
-                                            <th>Dokumen</th>
                                             <th>Status</th>
+                                            <th>Dokumen</th>
+                                            @if (Auth::user()->level_id == 1)
+                                            <th>Verifikasi</th>
+                                            @endif
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -68,10 +71,34 @@
                                                         <span class="badge badge-warning">{{ $aika->status }}</span>
                                                     @elseif($aika->status == 'Approved')
                                                         <span class="badge badge-success">{{ $aika->status }}</span>
-                                                    @else
+                                                    @elseif($aika->status == 'Rejected')
                                                         <span class="badge badge-danger">{{ $aika->status }}</span>
                                                     @endif
                                                 </td>
+                                                @if (Auth::user()->level_id == 1)
+                                                <td>
+                                                    <div class="d-flex">
+
+                                                        <form action="{{route('approve.aika', $aika->id)}}" method="post">
+                                                            @csrf
+                                                            <input name="status"
+                                                            id="status" type="hidden" value="Approved">
+                                                            <button class="btn btn-xs  btn-success"
+                                                            type="submit">Approve</button>
+                                                        </form>
+                                                        |
+                                                        <form action="{{route('rejected.aika', $aika->id)}}" method="post">
+                                                            @csrf
+                                                            <input name="status"
+                                                            id="status" type="hidden" value="Rejected">
+                                                            <button class="btn btn-xs  btn-danger"
+                                                            type="submit">Rejected</button>
+                                                        </form>
+
+                                                    </div>
+
+                                                </td>
+                                                @endif
                                                 <td>
                                                     <div class="text-center d-flex justify-content-between">
                                                         <a href="{{ route('aika.edit', $aika->id) }}" class="btn btn-warning btn-sm" title="Edit">
@@ -94,7 +121,7 @@
                                             </tr>
                                         @empty
                                         <tr>
-                                            <td colspan="11" class="text-center p-5">Data Kosong</td>
+                                            <td colspan="12" class="text-center p-5">Data Kosong</td>
                                         </tr>
                                         @endforelse
                                     </tbody>

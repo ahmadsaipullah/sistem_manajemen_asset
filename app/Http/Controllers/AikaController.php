@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Aika;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class AikaController extends Controller
@@ -13,7 +14,11 @@ class AikaController extends Controller
      */
     public function index()
     {
-        $aikas = Aika::with('user')->get();
+        if (Auth::user()->level_id == 1) {
+            $aikas = Aika::with('user')->get();
+        } else {
+            $aikas = Aika::with('user')->where('user_id', Auth::user()->id)->get();
+        }
         return view('pages.aika.index', compact('aikas'));
     }
 

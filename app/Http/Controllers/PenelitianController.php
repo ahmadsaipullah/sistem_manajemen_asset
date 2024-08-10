@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Penelitian;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class PenelitianController extends Controller
@@ -12,7 +13,11 @@ class PenelitianController extends Controller
      */
     public function index()
     {
-        $penelitians = Penelitian::with('user')->get();
+        if (Auth::user()->level_id == 1) {
+            $penelitians = Penelitian::with('user')->get();
+        } else {
+            $penelitians = Penelitian::with('user')->where('user_id', Auth::user()->id)->get();
+        }
         return view('pages.penelitian.index', compact('penelitians'));
     }
 

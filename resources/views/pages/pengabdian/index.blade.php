@@ -43,8 +43,11 @@
                                             <th>SK Kegiatan</th>
                                             <th>Tanggal SK Kegiatan</th>
                                             <th>Jumlah SKS</th>
-                                            <th>Dokumen</th>
                                             <th>Status</th>
+                                            <th>Dokumen</th>
+                                            @if (Auth::user()->level_id == 1)
+                                            <th>Verifikasi</th>
+                                            @endif
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -58,18 +61,43 @@
                                                 <td>{{ $pengabdian->sk_kegiatan }}</td>
                                                 <td>{{ $pengabdian->tanggal_sk_kegiatan }}</td>
                                                 <td>{{ $pengabdian->jumlah_sks }}</td>
-                                                <td>
-                                                    <a href="{{ Storage::url($pengabdian->dokumen) }}" target="_blank">View Dokumen</a>
-                                                </td>
+
                                                 <td>
                                                     @if($pengabdian->status == 'Pending')
                                                         <span class="badge badge-warning">{{ $pengabdian->status }}</span>
                                                     @elseif($pengabdian->status == 'Approved')
                                                         <span class="badge badge-success">{{ $pengabdian->status }}</span>
-                                                    @else
+                                                    @elseif($penunjang->status == 'Rejected')
                                                         <span class="badge badge-danger">{{ $pengabdian->status }}</span>
                                                     @endif
                                                 </td>
+                                                <td>
+                                                    <a href="{{ Storage::url($pengabdian->dokumen) }}" target="_blank">View Dokumen</a>
+                                                </td>
+                                                @if (Auth::user()->level_id == 1)
+                                                <td>
+                                                    <div class="d-flex">
+
+                                                        <form action="{{route('approve.pengabdian', $pengabdian->id)}}" method="post">
+                                                            @csrf
+                                                            <input name="status"
+                                                            id="status" type="hidden" value="Approved">
+                                                            <button class="btn btn-xs  btn-success"
+                                                            type="submit">Approve</button>
+                                                        </form>
+                                                        |
+                                                        <form action="{{route('rejected.pengabdian', $pengabdian->id)}}" method="post">
+                                                            @csrf
+                                                            <input name="status"
+                                                            id="status" type="hidden" value="Rejected">
+                                                            <button class="btn btn-xs  btn-danger"
+                                                            type="submit">Rejected</button>
+                                                        </form>
+
+                                                    </div>
+
+                                                </td>
+                                                @endif
                                                 <td>
                                                     <div class="text-center d-flex justify-content-between">
                                                         <a href="{{ route('pengabdian.edit', $pengabdian->id) }}" class="btn btn-warning btn-sm" title="Edit">
@@ -84,7 +112,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="10" class="text-center p-5">Data Kosong</td>
+                                                <td colspan="11" class="text-center p-5">Data Kosong</td>
                                             </tr>
                                         @endforelse
                                     </tbody>

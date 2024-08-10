@@ -43,8 +43,11 @@
                                             <th>SK Kegiatan</th>
                                             <th>Tanggal SK Kegiatan</th>
                                             <th>Jumlah SKS</th>
-                                            <th>Dokumen</th>
                                             <th>Status</th>
+                                            <th>Dokumen</th>
+                                            @if (Auth::user()->level_id == 1)
+                                            <th>Verifikasi</th>
+                                            @endif
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -58,18 +61,43 @@
                                                 <td>{{ $penunjang->sk_kegiatan }}</td>
                                                 <td>{{ $penunjang->tanggal_sk_kegiatan }}</td>
                                                 <td>{{ $penunjang->jumlah_sks }}</td>
-                                                <td>
-                                                    <a href="{{ Storage::url($penunjang->dokumen) }}" target="_blank">View Dokumen</a>
-                                                </td>
+
                                                 <td>
                                                     @if($penunjang->status == 'Pending')
                                                         <span class="badge badge-warning">{{ $penunjang->status }}</span>
                                                     @elseif($penunjang->status == 'Approved')
                                                         <span class="badge badge-success">{{ $penunjang->status }}</span>
-                                                    @else
+                                                    @elseif($penunjang->status == 'Rejected')
                                                         <span class="badge badge-danger">{{ $penunjang->status }}</span>
                                                     @endif
                                                 </td>
+                                                <td>
+                                                    <a href="{{ Storage::url($penunjang->dokumen) }}" target="_blank">View Dokumen</a>
+                                                </td>
+                                                @if (Auth::user()->level_id == 1)
+                                                <td>
+                                                    <div class="d-flex">
+
+                                                        <form action="{{route('approve.penunjang', $penunjang->id)}}" method="post">
+                                                            @csrf
+                                                            <input name="status"
+                                                                id="status" type="hidden" value="Approved">
+                                                            <button class="btn btn-xs  btn-success"
+                                                                type="submit">Approve</button>
+                                                        </form>
+                                                        |
+                                                        <form action="{{route('rejected.penunjang', $penunjang->id)}}" method="post">
+                                                            @csrf
+                                                            <input name="status"
+                                                            id="status" type="hidden" value="Rejected">
+                                                            <button class="btn btn-xs  btn-danger"
+                                                            type="submit">Rejected</button>
+                                                        </form>
+
+                                                    </div>
+
+                                                </td>
+                                                @endif
                                                 <td>
                                                     <div class="text-center d-flex justify-content-between">
                                                         <a href="{{ route('penunjang.edit', $penunjang->id) }}" class="btn btn-warning btn-sm" title="Edit">

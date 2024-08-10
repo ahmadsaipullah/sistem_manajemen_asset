@@ -44,17 +44,41 @@ Route::post('/approve-user/{id}' ,[verifikasiController::class, 'ApproveUser'])-
 // rejected
 Route::post('/rejected-user/{id}' ,[verifikasiController::class, 'RejectedUser'])->name('rejected.user');
 
+
+
 Route::resource('/pendidikan', PendidikanController::class);
 // approve
 Route::post('/approve-pendidikan/{id}' ,[verifikasiController::class, 'ApprovePendidikan'])->name('approve.pendidikan');
 // rejected
 Route::post('/rejected-pendidikan/{id}' ,[verifikasiController::class, 'RejectedPendidikan'])->name('rejected.pendidikan');
-Route::resource('/penelitian', PenelitianController::class);
-Route::resource('/pengabdian', PengabdianController::class);
-Route::resource('/penunjang', PenunjangController::class);
-Route::resource('/aika', AikaController::class);
 
-Route::resource('/dosen', dosenController::class);
+
+Route::resource('/penelitian', PenelitianController::class);
+// approve
+Route::post('/approve-penelitian/{id}' ,[verifikasiController::class, 'ApprovePenelitian'])->name('approve.penelitian');
+// rejected
+Route::post('/rejected-penelitian/{id}' ,[verifikasiController::class, 'RejectedPenelitian'])->name('rejected.penelitian');
+
+
+Route::resource('/pengabdian', PengabdianController::class);
+// approve
+Route::post('/approve-pengabdian/{id}' ,[verifikasiController::class, 'ApprovePengabdian'])->name('approve.pengabdian');
+// rejected
+Route::post('/rejected-pengabdian/{id}' ,[verifikasiController::class, 'RejectedPengabdian'])->name('rejected.pengabdian');
+
+
+Route::resource('/penunjang', PenunjangController::class);
+// approve
+Route::post('/approve-penunjang/{id}' ,[verifikasiController::class, 'ApprovePenunjang'])->name('approve.penunjang');
+// rejected
+Route::post('/rejected-penunjang/{id}' ,[verifikasiController::class, 'RejectedPenunjang'])->name('rejected.penunjang');
+
+
+Route::resource('/aika', AikaController::class);
+// approve
+Route::post('/approve-aika/{id}' ,[verifikasiController::class, 'ApproveAika'])->name('approve.aika');
+// rejected
+Route::post('/rejected-aika/{id}' ,[verifikasiController::class, 'RejectedAika'])->name('rejected.aika');
 
 
 
@@ -65,7 +89,39 @@ Route::resource('/dosen', dosenController::class);
 
 Route::middleware(['Dosen'])->group( function(){
 
+    Route::resource('/pendidikan', PendidikanController::class);
+    // approve
+    Route::post('/approve-pendidikan/{id}' ,[verifikasiController::class, 'ApprovePendidikan'])->name('approve.pendidikan');
+    // rejected
+    Route::post('/rejected-pendidikan/{id}' ,[verifikasiController::class, 'RejectedPendidikan'])->name('rejected.pendidikan');
 
+
+    Route::resource('/penelitian', PenelitianController::class);
+    // approve
+    Route::post('/approve-penelitian/{id}' ,[verifikasiController::class, 'ApprovePenelitian'])->name('approve.penelitian');
+    // rejected
+    Route::post('/rejected-penelitian/{id}' ,[verifikasiController::class, 'RejectedPenelitian'])->name('rejected.penelitian');
+
+
+    Route::resource('/pengabdian', PengabdianController::class);
+    // approve
+    Route::post('/approve-pengabdian/{id}' ,[verifikasiController::class, 'ApprovePengabdian'])->name('approve.pengabdian');
+    // rejected
+    Route::post('/rejected-pengabdian/{id}' ,[verifikasiController::class, 'RejectedPengabdian'])->name('rejected.pengabdian');
+
+
+    Route::resource('/penunjang', PenunjangController::class);
+    // approve
+    Route::post('/approve-penunjang/{id}' ,[verifikasiController::class, 'ApprovePenunjang'])->name('approve.penunjang');
+    // rejected
+    Route::post('/rejected-penunjang/{id}' ,[verifikasiController::class, 'RejectedPenunjang'])->name('rejected.penunjang');
+
+
+    Route::resource('/aika', AikaController::class);
+    // approve
+    Route::post('/approve-aika/{id}' ,[verifikasiController::class, 'ApproveAika'])->name('approve.aika');
+    // rejected
+    Route::post('/rejected-aika/{id}' ,[verifikasiController::class, 'RejectedAika'])->name('rejected.aika');
 
 });
 

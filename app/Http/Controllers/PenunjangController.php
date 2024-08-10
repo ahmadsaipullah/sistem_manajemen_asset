@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Penunjang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PenunjangController extends Controller
@@ -13,7 +14,11 @@ class PenunjangController extends Controller
      */
     public function index()
     {
-        $penunjangs = Penunjang::with('user')->get();
+        if (Auth::user()->level_id == 1) {
+            $penunjangs = Penunjang::with('user')->get();
+        } else {
+            $penunjangs = Penunjang::with('user')->where('user_id', Auth::user()->id)->get();
+        }
         return view('pages.penunjang.index', compact('penunjangs'));
     }
 
