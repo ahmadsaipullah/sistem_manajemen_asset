@@ -36,6 +36,7 @@ Route::put('/profile/password-update' ,[profileController::class, 'updatePasswor
 Route::put('/profile/{id}' ,[profileController::class, 'update'])->name('profile.update');
 
 
+
 Route::middleware(['Admin'])->group( function(){
 // crud admin
 Route::resource('/admin', adminController::class);
@@ -51,6 +52,8 @@ Route::resource('/pendidikan', PendidikanController::class);
 Route::post('/approve-pendidikan/{id}' ,[verifikasiController::class, 'ApprovePendidikan'])->name('approve.pendidikan');
 // rejected
 Route::post('/rejected-pendidikan/{id}' ,[verifikasiController::class, 'RejectedPendidikan'])->name('rejected.pendidikan');
+
+
 
 
 Route::resource('/penelitian', PenelitianController::class);

@@ -30,6 +30,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <a class="btn btn-primary" href="{{route('aika.create')}}"><i class="fa fa-plus"></i> Tambah Aika</a>
+                                <a class="btn btn-danger" href="#"><i class="fa fa-file-pdf"></i> Export PDF</a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">

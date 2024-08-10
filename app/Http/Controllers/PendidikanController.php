@@ -6,6 +6,7 @@ use App\Models\Pendidikan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class PendidikanController extends Controller
 {
@@ -122,4 +123,15 @@ class PendidikanController extends Controller
     {
         //
     }
+
+
+
+
+public function PDF()
+{
+    $pendidikans = Pendidikan::all();
+    $pdf = PDF::loadView('pages.pendidikan.cetak', compact('pendidikans'))->setPaper('a4', 'landscape');;
+    return $pdf->download('pendidikans.pdf');
+}
+
 }
