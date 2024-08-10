@@ -27,13 +27,12 @@
                 <!-- Small boxes (Stat box) -->
                 @if (auth()->user()->level_id == 1)
                     <div class="row">
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
+                        <!-- User Registrations -->
+                        <div class="col-lg-2 col-12">
                             <!-- small box -->
                             <div class="small-box bg-primary">
                                 <div class="inner">
                                     <h3>{{ $user }}</h3>
-
                                     <p>User Registrations</p>
                                 </div>
                                 <div class="icon">
@@ -44,47 +43,93 @@
                             </div>
                         </div>
 
-                        {{-- <div class="col-lg-3 col-6">
+                        <!-- Pendidikan -->
+                        <div class="col-lg-2 col-12">
                             <!-- small box -->
-                            <div class="small-box bg-light">
+                            <div class="small-box bg-info">
                                 <div class="inner">
-                                    <h3>{{ $wanita }}</h3>
-
-                                    <p>Mahasiswa Wanita</p>
+                                    <h3>{{ $pendidikan }}</h3>
+                                    <p>Pendidikan</p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-female"></i>
+                                    <i class="ion ion-document-text"></i>
                                 </div>
-                                <a href="{{ route('admin.index') }}" class="small-box-footer">More info <i
+                                <a href="{{ route('pendidikan.index') }}" class="small-box-footer">More info <i
                                         class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-6">
+
+                        <!-- Penelitian -->
+                        <div class="col-lg-2 col-12">
                             <!-- small box -->
-                            <div class="small-box bg-secondary">
+                            <div class="small-box bg-success">
                                 <div class="inner">
-                                    <h3>{{ $pria }}</h3>
-                                    <p>Mahasiswa Pria</p>
+                                    <h3>{{ $penelitian }}</h3>
+                                    <p>Penelitian</p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-male"></i>
+                                    <i class="ion ion-eye"></i>
                                 </div>
-                                <a href="{{ route('admin.index') }}" class="small-box-footer">More info <i
+                                <a href="{{ route('penelitian.index') }}" class="small-box-footer">More info <i
                                         class="fas fa-arrow-circle-right"></i></a>
                             </div>
-                        </div> --}}
-                        <!-- ./col -->
+                        </div>
 
+                        <!-- Pengabdian -->
+                        <div class="col-lg-2 col-12">
+                            <!-- small box -->
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3>{{ $pengabdian }}</h3>
+                                    <p>Pengabdian</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-heart"></i>
+                                </div>
+                                <a href="{{ route('pengabdian.index') }}" class="small-box-footer">More info <i
+                                        class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Penunjang -->
+                        <div class="col-lg-2 col-12">
+                            <!-- small box -->
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3>{{ $penunjang }}</h3>
+                                    <p>Penunjang</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-hammer"></i>
+                                </div>
+                                <a href="{{ route('penunjang.index') }}" class="small-box-footer">More info <i
+                                        class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Aika -->
+                        <div class="col-lg-2 col-12">
+                            <!-- small box -->
+                            <div class="small-box bg-purple">
+                                <div class="inner">
+                                    <h3>{{ $aika }}</h3>
+                                    <p>Aika</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-planet"></i>
+                                </div>
+                                <a href="{{ route('aika.index') }}" class="small-box-footer">More info <i
+                                        class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
                 @else
                     <div class="mb-4">
-
                         <div class="row d-flex justify-content-center">
                             <div class="col-md-12 mb-4">
                                 <h1 class="text-center text-bold">SISTEM MANAJEMEN ASSET</h1>
                             </div>
-
                 @endif
-                <!-- /.row (main row) -->
             </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->

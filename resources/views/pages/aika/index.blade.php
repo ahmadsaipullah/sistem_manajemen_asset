@@ -1,6 +1,6 @@
 @extends('layouts.template_default')
-@section('title', 'Halaman Pendidikan')
-@section('pendidikan','active')
+@section('title', 'Halaman Aika')
+@section('aika','active')
 @section('content')
     <div class="content-wrapper">
         @include('sweetalert::alert')
@@ -10,12 +10,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Halaman Pendidikan</h1>
+                        <h1>Halaman Aika</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                            <li class="breadcrumb-item active">Halaman Pendidikan</li>
+                            <li class="breadcrumb-item active">Halaman Aika</li>
                         </ol>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <a class="btn btn-primary" href="{{route('pendidikan.create')}}"><i class="fa fa-plus"></i> Tambah Pendidikan</a>
+                                <a class="btn btn-primary" href="{{route('aika.create')}}"><i class="fa fa-plus"></i> Tambah Aika</a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -38,74 +38,51 @@
                                         <tr>
                                             <th>No</th>
                                             <th>User</th>
+                                            <th>NBM</th>
                                             <th>Nama Kegiatan</th>
                                             <th>Lokasi Kegiatan</th>
                                             <th>SK Kegiatan</th>
                                             <th>Tanggal SK Kegiatan</th>
                                             <th>Jumlah SKS</th>
-                                            <th>Pertemuan</th>
-                                            <th>Status</th>
                                             <th>Dokumen</th>
-                                            <th>Verifikasi</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($pendidikans as $pendidikan)
+                                        @forelse ($aikas as $aika)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $pendidikan->user->name }}</td>
-                                                <td>{{ $pendidikan->nama_kegiatan }}</td>
-                                                <td>{{ $pendidikan->lokasi_kegiatan }}</td>
-                                                <td>{{ $pendidikan->sk_kegiatan }}</td>
-                                                <td>{{ $pendidikan->tanggal_sk_kegiatan }}</td>
-                                                <td>{{ $pendidikan->jumlah_sks }}</td>
-                                                <td>{{ $pendidikan->pertemuan }}</td>
+                                                <td>{{ $aika->user->name }}</td>
+                                                <td>{{ $aika->nbm }}</td>
+                                                <td>{{ $aika->nama_kegiatan }}</td>
+                                                <td>{{ $aika->lokasi_kegiatan }}</td>
+                                                <td>{{ $aika->sk_kegiatan }}</td>
+                                                <td>{{ $aika->tanggal_sk_kegiatan }}</td>
+                                                <td>{{ $aika->jumlah_sks }}</td>
                                                 <td>
-                                                    @if($pendidikan->status == 'Pending')
-                                                        <span class="badge badge-warning">{{ $pendidikan->status }}</span>
-                                                    @elseif($pendidikan->status == 'Approved')
-                                                        <span class="badge badge-success">{{ $pendidikan->status }}</span>
-                                                    @elseif($pendidikan->status == 'Rejected')
-                                                        <span class="badge badge-danger">{{ $pendidikan->status }}</span>
+                                                    <a href="{{ Storage::url($aika->dokumen) }}" target="_blank">View Dokumen</a>
+                                                </td>
+                                                <td>
+                                                    @if($aika->status == 'Pending')
+                                                        <span class="badge badge-warning">{{ $aika->status }}</span>
+                                                    @elseif($aika->status == 'Approved')
+                                                        <span class="badge badge-success">{{ $aika->status }}</span>
+                                                    @else
+                                                        <span class="badge badge-danger">{{ $aika->status }}</span>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ Storage::url($pendidikan->dokumen) }}" target="_blank">View Dokumen</a>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex">
-
-                                                        <form action="{{route('approve.pendidikan', $pendidikan->id)}}" method="post">
-                                                            @csrf
-                                                            <input name="status"
-                                                                id="status" type="hidden" value="Approved">
-                                                            <button class="btn btn-xs  btn-success"
-                                                                type="submit">Approve</button>
-                                                        </form>
-    |
-                                                        <form action="{{route('rejected.pendidikan', $pendidikan->id)}}" method="post">
-                                                            @csrf
-                                                            <input name="status"
-                                                                id="status" type="hidden" value="Rejejcted">
-                                                            <button class="btn btn-xs  btn-danger"
-                                                                type="submit">Rejected</button>
-                                                        </form>
-
-                                                    </div>
-
-                                                </td>
-                                                <td>
                                                     <div class="text-center d-flex justify-content-between">
-                                                        <a href="{{ route('pendidikan.edit', $pendidikan->id) }}" class="btn btn-warning btn-sm" title="Edit">
+                                                        <a href="{{ route('aika.edit', $aika->id) }}" class="btn btn-warning btn-sm" title="Edit">
                                                             <i class="fa fa-pen"></i>
                                                         </a>
 
-                                                        <a href="{{ route('pendidikan.show', $pendidikan->id) }}" class="btn btn-primary btn-sm" title="View">
+                                                        <a href="{{ route('aika.show', $aika->id) }}" class="btn btn-primary btn-sm" title="View">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
 
-                                                        {{-- <form action="{{ route('pendidikan.destroy', $pendidikan->id) }}" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                                        {{-- <form action="{{ route('aika.destroy', $aika->id) }}" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this item?');">
                                                             @csrf
                                                             @method('delete')
                                                             <button class="btn btn-danger btn-sm" type="submit" title="Delete">

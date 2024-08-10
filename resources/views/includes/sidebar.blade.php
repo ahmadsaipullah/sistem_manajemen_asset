@@ -60,13 +60,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link @yield('penunjang')">
+                        <a href="{{ route('penunjang.index')}}" class="nav-link @yield('penunjang')">
                             <i class="nav-icon ion ion-compose"></i>
                             <p>Penunjang</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link @yield('aika')">
+                        <a href="{{ route('aika.index')}}" class="nav-link @yield('aika')">
                             <i class="nav-icon ion ion-clipboard"></i>
                             <p>Aika</p>
                         </a>

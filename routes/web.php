@@ -1,10 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AikaController;
 use App\Http\Controllers\profileController;
+use App\Http\Controllers\PenunjangController;
 use App\Http\Controllers\PendidikanController;
 use App\Http\Controllers\PenelitianController;
 use App\Http\Controllers\PengabdianController;
+use App\Http\Controllers\verifikasiController;
 use App\Http\Controllers\Admin\{adminController,dashboardController,dosenController};
 
 /*
@@ -36,9 +39,20 @@ Route::put('/profile/{id}' ,[profileController::class, 'update'])->name('profile
 Route::middleware(['Admin'])->group( function(){
 // crud admin
 Route::resource('/admin', adminController::class);
+// approve
+Route::post('/approve-user/{id}' ,[verifikasiController::class, 'ApproveUser'])->name('approve.user');
+// rejected
+Route::post('/rejected-user/{id}' ,[verifikasiController::class, 'RejectedUser'])->name('rejected.user');
+
 Route::resource('/pendidikan', PendidikanController::class);
+// approve
+Route::post('/approve-pendidikan/{id}' ,[verifikasiController::class, 'ApprovePendidikan'])->name('approve.pendidikan');
+// rejected
+Route::post('/rejected-pendidikan/{id}' ,[verifikasiController::class, 'RejectedPendidikan'])->name('rejected.pendidikan');
 Route::resource('/penelitian', PenelitianController::class);
 Route::resource('/pengabdian', PengabdianController::class);
+Route::resource('/penunjang', PenunjangController::class);
+Route::resource('/aika', AikaController::class);
 
 Route::resource('/dosen', dosenController::class);
 
@@ -46,13 +60,6 @@ Route::resource('/dosen', dosenController::class);
 
 });
 
-
-
-Route::middleware(['Prodi'])->group( function(){
-
-
-
-});
 
 
 
@@ -63,19 +70,7 @@ Route::middleware(['Dosen'])->group( function(){
 });
 
 
-Route::middleware(['Akademik'])->group( function(){
 
-
-
-});
-
-
-
-Route::middleware(['Mahasiswa'])->group( function(){
-
-
-
-});
 
 
 

@@ -42,6 +42,7 @@
                                             <th>Role</th>
                                             <th>Status</th>
                                             <th>Image</th>
+                                            <th>Verfikasi</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -74,6 +75,26 @@
                                                     </div>
 
                                             </td>
+
+                                            <td>
+                                                    @if ($admin->status_keaktifan == 'Non Active')
+                                                    <form action="{{route('approve.user', $admin->id)}}" method="post">
+                                                        @csrf
+                                                        <input name="status_keaktifan"
+                                                            id="status_keaktifan" type="hidden" value="Active">
+                                                        <button class="btn btn-xs  btn-success"
+                                                            type="submit">Approve</button>
+                                                    </form>
+                                                    @else
+                                                    <form action="{{route('rejected.user', $admin->id)}}" method="post">
+                                                        @csrf
+                                                        <input name="status_keaktifan"
+                                                            id="status_keaktifan" type="hidden" value="Non Active">
+                                                        <button class="btn btn-xs  btn-danger"
+                                                            type="submit">Non Active</button>
+                                                    </form>
+                                                    @endif
+                                                </td>
                                                 <td>
 
                                                     <div class="text-center d-flex justify-content-between">
