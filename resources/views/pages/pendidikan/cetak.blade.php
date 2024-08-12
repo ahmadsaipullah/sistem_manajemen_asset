@@ -34,6 +34,7 @@
                 <th>Jumlah SKS</th>
                 <th>Pertemuan</th>
                 <th>Status</th>
+                <th>Dokumen</th>
             </tr>
         </thead>
         <tbody>
@@ -48,6 +49,21 @@
                 <td>{{ $pendidikan->jumlah_sks }}</td>
                 <td>{{ $pendidikan->pertemuan }}</td>
                 <td>{{ $pendidikan->status }}</td>
+                <td>
+                    <a href="{{ url(Storage::url($pendidikan->dokumen)) }}" target="_blank" id="print-pdf-{{ $pendidikan->id }}">View & Print Dokumen</a>
+                </td>
+
+                <script>
+                    document.getElementById('print-pdf-{{ $pendidikan->id }}').addEventListener('click', function(e) {
+                        e.preventDefault();
+                        var pdfUrl = this.href;
+                        var win = window.open(pdfUrl, '_blank');
+                        win.focus();
+                        win.print();
+                    });
+                </script>
+
+
             </tr>
             @endforeach
         </tbody>

@@ -37,6 +37,7 @@
                 <th>Tanggal SK Kegiatan</th>
                 <th>Jumlah SKS</th>
                 <th>Status</th>
+                <th>Dokumen</th>
             </tr>
         </thead>
         <tbody>
@@ -50,6 +51,19 @@
                     <td>{{ $pengabdian->tanggal_sk_kegiatan }}</td>
                     <td>{{ $pengabdian->jumlah_sks }}</td>
                     <td>{{ $pengabdian->status }}</td>
+                    <td>
+                        <a href="{{ url(Storage::url($pengabdian->dokumen)) }}" target="_blank" id="print-pdf-{{ $pengabdian->id }}">View & Print Dokumen</a>
+                    </td>
+
+                    <script>
+                        document.getElementById('print-pdf-{{ $pengabdian->id }}').addEventListener('click', function(e) {
+                            e.preventDefault();
+                            var pdfUrl = this.href;
+                            var win = window.open(pdfUrl, '_blank');
+                            win.focus();
+                            win.print();
+                        });
+                    </script>
                 </tr>
             @endforeach
         </tbody>

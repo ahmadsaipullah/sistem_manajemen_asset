@@ -7,10 +7,10 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
+                    <div class="col-sm-8">
                         <h1 class="m-0">Selamat Datang, <span class="btn btn-xs btn-success font-italic">{{ auth()->user()->name }}</span> Di Sistem Manajemen Asset UMT</h1>
                     </div><!-- /.col -->
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                             <li class="breadcrumb-item active">Dashboard</li>
@@ -124,11 +124,83 @@
                         </div>
                     </div>
                 @else
-                    <div class="mb-4">
-                        <div class="row d-flex justify-content-center">
-                            <div class="col-md-12 mb-4">
-                                <h1 class="text-center text-bold">SISTEM MANAJEMEN ASSET</h1>
+                <div class="mb-4">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-12 mb-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Biodata</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Name:</label>
+                                                <p>{{ auth()->user()->name }}</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Email:</label>
+                                                <p>{{ auth()->user()->email }}</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>NIP:</label>
+                                                <p>{{ auth()->user()->nip }}</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>NIDN:</label>
+                                                <p>{{ auth()->user()->nidn }}</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Fakultas:</label>
+                                                <p>{{ auth()->user()->fakultas }}</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Prodi:</label>
+                                                <p>{{ auth()->user()->prodi }}</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Status Dosen:</label>
+                                                <p>{{ auth()->user()->status_dosen }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Jabatan Fungsional:</label>
+                                                <p>{{ auth()->user()->jabatan_fungsional }}</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Jabatan:</label>
+                                                <p>{{ auth()->user()->jabatan }}</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Status Serdos:</label>
+                                                <p>{{ auth()->user()->status_serdos }}</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>No HP:</label>
+                                                <p>{{ auth()->user()->no_hp }}</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Dokumen:</label>
+                                                <p>{{ auth()->user()->dokumen }}</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Status Keaktifan:</label>
+                                                <p>{{ auth()->user()->status_keaktifan }}</p>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Dokumen</label>
+                                                <p> <a href="{{ Storage::url(auth()->user()->dokumen) }}" target="_blank">View Dokumen</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 @endif
             </div><!-- /.container-fluid -->
         </section>

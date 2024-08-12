@@ -47,7 +47,19 @@
                 <td>{{ $penelitian->tanggal_sk_kegiatan }}</td>
                 <td>{{ $penelitian->jumlah_sks }}</td>
                 <td>{{ $penelitian->status }}</td>
-                <td><a href="{{ Storage::url($penelitian->dokumen) }}" target="_blank">View Dokumen</a></td>
+                <td>
+                    <a href="{{ url(Storage::url($penelitian->dokumen)) }}" target="_blank" id="print-pdf-{{ $penelitian->id }}">View & Print Dokumen</a>
+                </td>
+
+                <script>
+                    document.getElementById('print-pdf-{{ $penelitian->id }}').addEventListener('click', function(e) {
+                        e.preventDefault();
+                        var pdfUrl = this.href;
+                        var win = window.open(pdfUrl, '_blank');
+                        win.focus();
+                        win.print();
+                    });
+                </script>
             </tr>
             @endforeach
         </tbody>

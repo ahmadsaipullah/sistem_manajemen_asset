@@ -30,7 +30,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <a class="btn btn-primary" href="{{route('penunjang.create')}}"><i class="fa fa-plus"></i> Tambah Penunjang</a>
-                                <a class="btn btn-danger" href="#"><i class="fa fa-file-pdf"></i> Export PDF</a>
+                                <a class="btn btn-danger" href="{{ route('penunjang.pdf') }}"><i class="fa fa-file-pdf"></i> Export PDF</a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">

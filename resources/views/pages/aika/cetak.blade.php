@@ -51,7 +51,19 @@
                 <td>{{ $aika->tanggal_sk_kegiatan }}</td>
                 <td>{{ $aika->jumlah_sks }}</td>
                 <td>{{ $aika->status }}</td>
-                <td><a href="{{ Storage::url($aika->dokumen) }}" target="_blank">View Dokumen</a></td>
+                <td>
+                    <a href="{{ url(Storage::url($aika->dokumen)) }}" target="_blank" id="print-pdf-{{ $aika->id }}">View & Print Dokumen</a>
+                </td>
+
+                <script>
+                    document.getElementById('print-pdf-{{ $aika->id }}').addEventListener('click', function(e) {
+                        e.preventDefault();
+                        var pdfUrl = this.href;
+                        var win = window.open(pdfUrl, '_blank');
+                        win.focus();
+                        win.print();
+                    });
+                </script>
             </tr>
             @endforeach
         </tbody>
